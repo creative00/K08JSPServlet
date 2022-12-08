@@ -11,8 +11,7 @@
 	세션 영역은 웹 브라우저를 닫으면 소멸된다.
 	-->
 	<%
-	ArrayList<String> lists = 
-		(ArrayList<String>)session.getAttribute("lists");
+	ArrayList<String> lists = (ArrayList<String>)session.getAttribute("lists");
 	for (String str : lists)
 		out.print(str + "<br/>");
 	%>

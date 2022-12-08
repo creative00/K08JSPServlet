@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8" buffer="1kb" autoFlush="false"%>
+    pageEncoding="UTF-8" buffer="1kb" autoFlush="true"%>
 <!--
 JSP는 화면 상에 내용을 출력 시 항상 버퍼에 먼저 저장한다.
 buffer속성을 통해 버퍼의 용량을 설정할 수 있고
