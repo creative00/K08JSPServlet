@@ -11,6 +11,7 @@ String str2 = "안녕하세요";
 <title>Hello JSP..!!</title>
 </head>
 <body>
+	<h2>화이팅</h2>	
 	<h2>처음 만들어보는 <%=str1%></h2>
 	<p>
 	<%
