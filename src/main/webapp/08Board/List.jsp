@@ -8,7 +8,6 @@
 <%
 //DB연결 및 CRUD작업 위한 DAO객체를 생성한다.
 BoardDAO dao = new BoardDAO(application);
-
 /*
 검색어가 있는 경우 클라이언트가 선택한 필드명과
 검색어를 저장할 Map컬렉션을 생성한다.
@@ -58,7 +57,9 @@ dao.close();
     </tr>   
     </table>
     </form>
+    <!-- 게시물 목록 테이블(표)  -->
     <table border="1" width="90%">
+    	<!--각 칼럼의 이름  -->
         <tr>
             <th width="10%">번호</th>
             <th width="50%">제목</th>
@@ -106,7 +107,6 @@ else {
 }
 %>
     </table>
-   
     <table border="1" width="90%">
         <tr align="right">
             <td><button type="button" onclick="location.href='Write.jsp';">글쓰기
