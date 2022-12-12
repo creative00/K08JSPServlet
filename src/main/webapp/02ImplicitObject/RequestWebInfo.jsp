@@ -14,7 +14,7 @@
 			<!--현재 접속한 전체경로를 반환 -->
 			<li>URL : <%=request.getRequestURL() %></li>
 			<!--URL에서 호스트(Host)를 제외한 나머지 경로를 반환  -->
-			<li>URL : <%=request.getRequestURI() %></li>
+			<li>URI : <%=request.getRequestURI() %></li>
 			<li>프로토콜 : <%= request.getProtocol() %></li>
 			<li>서버명 : <%=request.getServerName() %></li>
 			<li>서버포트 : <%=request.getServerPort() %></li>

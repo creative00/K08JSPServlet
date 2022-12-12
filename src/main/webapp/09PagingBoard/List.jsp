@@ -83,6 +83,8 @@ dao.close();
 	<!-- 공통 링크  -->
     <jsp:include page="../Common/Link.jsp" />  
 
+	<!-- 앞에서 계산해둔 전체페이지수와 파라미터 통해 얻어온
+		현재 페이지번호를 출력한다. -->
     <h2>목록 보기(List) - 현재 페이지 <%= pageNum %>(전체 : <%= totalPage %>)</h2>
     <!-- 검색폼 -->
     <form method="get">  
@@ -124,13 +126,17 @@ else {
 	//출력할 게시물이 있는 경우에는 확장 for문으로 List컬렉션에
 	//저장된 데이터의 갯수만큼 반복하여 출력한다.
     int virtualNum = 0; 
+	//페이지가 적용된 가상번호를 계산하기 위해 생성한 변수
 	int countNum = 0;
+	
     for (BoardDTO dto : boardLists)
     {
     	//현재 출력할 게시물의 갯수에 따라 출력번호는 달라지므로
     	//totalCount 사용해 가상번호를 부여한다.
         //virtualNum = totalCount--;  
-    	virtualNum = totalCount - (((pageNum - 1)* pageSize) + countNum++);
+    	//전체 게시물 수 - (((현재페이지- 1) * 한페이지 출력갯수) + countNum증가치)
+    	virtualNum = totalCount - (((pageNum - 1)* pageSize) 
+    			+ countNum++);
 %>
         <tr align="center">
         	<!-- 게시물의 가상 번호  -->
@@ -156,6 +162,17 @@ else {
         <tr align="center">
         <!--페이징 처리 -->
         <td>
+        <!--totalCount : 전체 게시물의 갯수
+            pageSize : 한 페이지에 출력할 게시물의 갯수
+        	blockPage : 한 블럭 당 출력할 페이지 번호의 갯수
+        	pageNum : 현 페이지 번호
+        	request.getRequestURI() : request내장 객체 통해 현 페이지의 
+        	Host를 제외한 나머지 경로명을 얻어올 수 있다.
+        	여기서 얻은 경로명을 통해 "경로명.jsp?pageNum=페이지번호"와 같은
+        	바로가기 링크를 생성한다.
+          -->
+
+          	<% System.out.println("현재 경로="+ request.getRequestURI()); %>
         	<%= BoardPage.pagingStr(totalCount, pageSize,
         			blockPage, pageNum, request.getRequestURI()) %>
         </td>
