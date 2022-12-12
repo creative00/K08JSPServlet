@@ -21,7 +21,18 @@ dto.setId(session.getAttribute("UserId").toString());
 //DB 연결을 위해 DAO객체를 생성한다.
 BoardDAO dao = new BoardDAO(application);
 //입력값이 저장된 DTO객체를 인수로 전달해 insert쿼리문을 실행한다.
-int iResult = dao.insertWrite(dto);
+
+
+//기존 코드
+//int iResult = dao.insertWrite(dto);
+
+//더미 데이터를 삽입하기 위한 코드
+int iResult = 0;
+for (int i =1; i <=100; i++) {
+	dto.setTitle(title + "-" + i);
+	iResult = dao.insertWrite(dto);
+}
+dao.close();
 //자원해제
 dao.close();
 
@@ -32,6 +43,10 @@ if (iResult == 1){
 	//실패했다면 재입력 위해 글쓰기 페이지로 다시 돌아간다.
 	JSFunction.alertBack("글쓰기에 실패하였습니다.", out);
 }
+
+
+
+
 %>
 <!DOCTYPE html>
 <html>
