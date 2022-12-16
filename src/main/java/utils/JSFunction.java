@@ -1,5 +1,8 @@
 package utils;
 
+import java.io.PrintWriter;
+
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.jsp.JspWriter;
 //메서드 생성 시 static통해 정적메서드로 정의되었으므로
 //객체 생성 없이 클래스명으로 즉시 메서드를 호출할 수 있다.
@@ -22,6 +25,8 @@ public class JSFunction {
 		}
 		catch (Exception e) {}
 	}
+	
+	
 	public static void alertBack(String msg, JspWriter out) {
 		try {
 			String script =""
@@ -33,4 +38,38 @@ public class JSFunction {
 		}
 		catch (Exception e) {}
 	}
+	/*
+	 앞의 2개의 메서드는 JSP에서 out내장객체를 받은 후 Javascript 함수를 실행함
+	 하지만 서블릿에서는 JSP의 내장객체를 매개변수로 받을 수 없으므로
+	 out내장객체 대신 response내장객체를 통해 컨텐츠 타입 설정 후 JS코드 실행해야 함 
+	 */
+	public static void alertLocation( HttpServletResponse resp, String msg, String url) {
+		try {
+			//컨텐츠 타입을 설정
+			resp.setContentType("text/html; charset:utf-8");
+			//PrintWriter  객체 통해 스크립트를 서블릿에서 직접 출력한다.
+			PrintWriter writer = resp.getWriter();
+			
+			String script = ""
+						+ "<script>"
+						+ "  alert('" + msg + "');"
+						+ "  location.href='" + url + "';"
+						+ "</script>";
+			writer.print(script);
+		}
+		catch (Exception e) {}
+	}
+	public static void alertBack(HttpServletResponse resp, String msg ) {
+		try {
+			resp.setContentType("text/html; charset:utf-8");
+			PrintWriter writer = resp.getWriter();
+			String script =""
+						+ "<script>"
+						+ "  alert('" + msg + "');"
+						+ "  history.back();"
+						+ "</script>";
+			writer.print(script);
+		}
+		catch (Exception e) {}
+	}	
 }
