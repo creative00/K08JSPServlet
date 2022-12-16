@@ -33,19 +33,26 @@
 	<span style="color: red;">${errorMessage }</span>
 	
 	<!-- 파일 업로드 위한 form태그 작성 시 필수사항  
-			1.method 즉 전송 박식은 반드시 post로 지정해야 함
+			1.method 즉 전송 방식은 반드시 post로 지정해야 함
 			2. enctype을 multipart/form-data로 지정해야 한다.
 			
 			일반적인 폼값 전송 위해 enctype을 명시하지 않는 경우
 				request내장객체의 getParameter()로 폼값을 받을 수 있다.
 			
 			파일 업로드를 위해 enctype을 위와 같이 명시하는 경우
-				request내장객체로는 폼값을 받을 수 었다.
-				cos.jar 확장라이브러리에서 제공하는 MultipartRequest객체 통해
-				받아야한다.
+			request내장객체로는 폼값을 받을 수 었다.
+			cos.jar 확장라이브러리에서 제공하는 MultipartRequest객체 통해
+			받아야한다.
 	-->
-     <form name="fileForm" method="post" enctype="multipart/form-data"
+	<!-- 파일명을 날짜와 시간 통해 변경하는 방식으로 실무에서 주로 사용하는 방식  -->
+	<form name="fileForm" method="post" enctype="multipart/form-data"
           action="UploadProcess.jsp" onsubmit="return validateForm(this);">
+          
+          
+     <!-- 파일명을 그대로 사용하고, 중복되는 경우 자동으로 인덱싱를 부여해
+     처리하는 방식  -->     
+     <!-- <form name="fileForm" method="post" enctype="multipart/form-data"
+          action="SimpleProcess.jsp" onsubmit="return validateForm(this);"> -->
         작성자 : <input type="text" name="name" value="머스트해브" /><br />
         제목 : <input type="text" name="title" /><br /> 
         카테고리(선택사항) : 
