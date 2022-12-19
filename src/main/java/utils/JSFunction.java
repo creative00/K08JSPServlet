@@ -46,14 +46,14 @@ public class JSFunction {
 	public static void alertLocation( HttpServletResponse resp, String msg, String url) {
 		try {
 			//컨텐츠 타입을 설정
-			resp.setContentType("text/html; charset:utf-8");
+			resp.setContentType("text/html;charset=UTF-8");
 			//PrintWriter  객체 통해 스크립트를 서블릿에서 직접 출력한다.
 			PrintWriter writer = resp.getWriter();
 			
 			String script = ""
 						+ "<script>"
-						+ "  alert('" + msg + "');"
-						+ "  location.href='" + url + "';"
+						+ "  	alert('" + msg + "');"
+						+ "  	location.href='" + url + "';"
 						+ "</script>";
 			writer.print(script);
 		}
@@ -61,12 +61,12 @@ public class JSFunction {
 	}
 	public static void alertBack(HttpServletResponse resp, String msg ) {
 		try {
-			resp.setContentType("text/html; charset:utf-8");
+			resp.setContentType("text/html;charset=UTF-8");
 			PrintWriter writer = resp.getWriter();
 			String script =""
 						+ "<script>"
-						+ "  alert('" + msg + "');"
-						+ "  history.back();"
+						+ "  	alert('" + msg + "');"
+						+ "  	history.back();"
 						+ "</script>";
 			writer.print(script);
 		}

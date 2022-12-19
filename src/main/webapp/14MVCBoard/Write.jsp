@@ -43,6 +43,11 @@
  -->
 
 <h2>파일 첨부형 게시판 - 글쓰기(Write)</h2>
+
+<!--
+파일첨부를 위한 작성폼은 아래 2가지가 만족되어야 한다.
+1. method 
+-->
 <form name="writeFrm" method="post" enctype="multipart/form-data" 
 	action="../mvcboard/write.do" onsubmit="return validateForm(this);">
     <table border="1" width="90%">

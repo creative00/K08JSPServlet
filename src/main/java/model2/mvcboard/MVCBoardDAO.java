@@ -119,16 +119,20 @@ public class MVCBoardDAO extends DBConnPool {
 		return result;		
 	}
 	//예제 14-16] /model2/mvcboard/MVCBoardDAO.java 메서드 추가
-	//금요일 수업끝난 후 예습용으로 입력
+	//내용보기 위해 일련번호를 인수로 받아 게시물을 인출
 	public MVCBoardDTO selectView(String idx) {
+		
+		//레코드 저장을 위해 DTO객체를 생성한다.
 		MVCBoardDTO dto = new MVCBoardDTO();
+		//쿼리문 작성 후 인파라미터를 설정하고 실행한다.
 		String query = "SELECT * FROM mvcboard WHERE idx=?";
 		try {
 			psmt = con.prepareStatement(query);
 			psmt.setString(1, idx);
 			rs = psmt.executeQuery();
-			
+			//하나의 게시물이므로 if문을 통해 next()함수를 실행한다.
 			if (rs.next()) {
+				//인출한 게시물이 있다면 DTO객체에 저장한다.
 				dto.setIdx(rs.getString(1));
 				dto.setName(rs.getString(2));
 				dto.setTitle(rs.getString(3));
@@ -148,10 +152,11 @@ public class MVCBoardDAO extends DBConnPool {
 		return dto;
 	}
 	
+	//게시물의 조회수를 1증가시킨다.
 	public void updateVisitCount(String idx) {
 		String query = "UPDATE mvcboard SET "
 					+ " visitcount=visitcount+1 "
-					+ " WHERE idx=?";
+					+ " WHERE idx=? ";
 				
 		try {
 			psmt = con.prepareStatement(query);
@@ -163,6 +168,54 @@ public class MVCBoardDAO extends DBConnPool {
 			e.printStackTrace();
 		}
 	}
-
+	public void downCountPlus(String idx) {
+		String sql = "UPDATE mvcboard SET "
+				+ " downcount=downcount+1 " 
+				+ " WHERE idx=? ";
+		try {
+			psmt = con.prepareStatement(sql);
+			psmt.setString(1, idx);
+			psmt.executeQuery();
+		}
+		catch (Exception e){
+		}
+	}
+	//패스워드 검증을 위한 메서드로 조건에 맞는 게시물을 카운트한다.
+	public boolean confirmPassword(String pass, String idx) {
+		boolean isCorr = true;
+		try {
+			//일련번호와 패스워드가 일치하는 게시물이 있는지 확인
+			String sql = "SELECT COUNT(*) FROM mvcboard WHERE pass=? AND idx=?";
+			psmt = con.prepareStatement(sql);
+			psmt.setString(1, pass);
+			psmt.setString(2, idx);
+			rs = psmt.executeQuery();
+			//count()함수의 경우 조건에 맞는 레코드가 없으면 0을 반환하므로
+			//어떤 경우에도 결과값이 있다. 따라서 next()를 단독으로 실행한다.
+			rs.next();
+			if(rs.getInt(1) == 0) {
+				isCorr = false;
+			}
+		}
+		catch (Exception e){
+			isCorr = false;
+			e.printStackTrace();
+		}
+		return isCorr;
+	}
 	
+	public int deletePost(String idx) {
+		int result = 0;
+		try {
+			String query = "DELETE FROM mvcboard WHERE idx=?";
+			psmt = con.prepareStatement(query);
+			psmt.setString(1, idx);
+			result = psmt.executeUpdate();
+		}
+		catch (Exception e) {
+			System.out.println("게시물 삭제 중 예외 발생");
+			e.printStackTrace();
+		}
+		return result;
+	}
 }
