@@ -49,8 +49,22 @@ public class PassController extends HttpServlet {
 		//패스워드 검증에 성공한 경우에는 ...
 		if (confirmed) {
 			if (mode.equals("edit")) {
+				/*
+				수정의 경우 검증이 완료된 패스워드를 session영역에 저장한다.
+				session영역은 페이지를 이동해도 데이터가 공유되므로
+				해당 게시물을 수정완료할 때까지 유지하고,
+				수정이 완료되면 제거할 것이다. 여기에서 저장한 패스워드는
+				수정 위한 update 쿼리문의 where절을 사용할 예정이다.
+				*/
+				//getSession()메서드 통해 session객체를 얻어온다.
 				HttpSession session = req.getSession();
+				//검증에 사용된 패스워드를 세션영역에 저장한다.
 				session.setAttribute("pass", pass);
+				/*
+				수정 페이지로 이동한다. 만약 아래 URL패턴을 이용해
+				패스워드 검증 없이 진입하였다면 세션에 저장된 패스워드가 없을 것이므로
+				수정처리가 되지 않도록 처리할 것이다.
+				*/
 				resp.sendRedirect("../mvcboard/edit.do?idx=" + idx);			
 			}
 			else if (mode.equals("delete")){
@@ -64,6 +78,10 @@ public class PassController extends HttpServlet {
 				//게시물 삭제에 성공했다면..
 				if (result == 1) {
 					//파일도 삭제한다.
+					//파일 삭제여부는 아래의 경로에서 확인
+					/*
+					 C:\02Workspaces\K08JSPServlet\.metadata\.plugins\org.eclipse.wst.server.core\tmp0\wtpwebapps\K08JSPServlet\Uploads 
+					 */
 					String saveFileName = dto.getSfile();
 					FileUtil.deleteFile(req, "/Uploads", saveFileName);
 				}
