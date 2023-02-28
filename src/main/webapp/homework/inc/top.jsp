@@ -2,10 +2,7 @@
     pageEncoding="UTF-8"%>
 
 <div class="col-12">
-       <!-- 
-	.bg-primary, .bg-success, .bg-info, .bg-warning, .bg-danger, .bg-secondary, 
-	.bg-dark, .bg-light
--->
+      
        <nav class="navbar navbar-expand-sm bg-warning navbar-secondary">
            <!-- Brand/logo -->
            <a class="navbar-brand" href="#">
@@ -43,13 +40,13 @@
                </div>
            </form>
 
-           <ul class="navbar-nav ms-auto">
-               <li class="nav-item">
-	<a class="nav-link" href="#"><i class='bi bi-person-plus-fill' style='font-size:20px'></i>회원가입</a>
-</li>
-<li class="nav-item">
-	<a class="nav-link" href="#"><i class='bi bi-person-lines-fill' style='font-size:20px'></i>회원정보수정</a>
-</li>
+			<ul class="navbar-nav ms-auto">
+				<li class="nav-item">
+					<a class="nav-link" href="#"><i class='bi bi-person-plus-fill' style='font-size:20px'></i>회원가입</a>
+				</li>
+				<li class="nav-item">
+					<a class="nav-link" href="#"><i class='bi bi-person-lines-fill' style='font-size:20px'></i>회원정보수정</a>
+				</li>
                <li class="nav-item">
                    <a class="nav-link" href="#"><i class='bi bi-box-arrow-in-right'
                            style='font-size:20px'></i>로그인</a>

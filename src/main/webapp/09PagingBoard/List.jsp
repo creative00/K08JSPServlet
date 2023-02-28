@@ -62,7 +62,7 @@ if (pageTemp != null && !pageTemp.equals(""))
 각 페이지의 시작번호와 종료번호를 현 페이지 번호와 페이지사이즈를 통해
 계산한 수 DAO로 전달하기 위해 MAP컬렉션에 추가한다.
 */
-int start = (pageNum - 1) * pageSize + 1;
+int start = (pageNum - 1) * pageSize;
 int end = pageNum * pageSize;
 param.put("start", start);
 param.put("end", end);

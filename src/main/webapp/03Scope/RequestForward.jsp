@@ -4,6 +4,7 @@
 <html>
 <head><title>request 영역</title></head>
 <body>
+
 	<h2>포워드로 전달된 페이지</h2>
 	<h4>RequestMain 파일의 리퀘스트 영역 속성 읽기</h4>
 	<%
